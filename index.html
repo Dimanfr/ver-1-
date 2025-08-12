@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital-KI – Automatisierte Patienten-Erinnerung für Sanitätshäuser</title>
+  <meta name="description" content="Digital-KI automatisiert Patienten-Erinnerungen für Sanitätshäuser – ohne Software-Umstellung und 100% DSGVO-konform.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="fade-in">
+    <nav class="container nav">
+      <div class="logo">Digital-KI</div>
+      <ul class="nav-links">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#vorteile">Vorteile</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+      <a href="#kontakt" class="btn btn-small">Kostenlose Beratung</a>
+    </nav>
+  </header>
+  <main>
+    <section id="hero" class="hero fade-in">
+      <div class="container">
+        <h1>Mehr Umsatz ohne Mehraufwand</h1>
+        <p>Die automatisierte Erinnerungslösung für Sanitätshäuser – nahtlos integriert in Ihre bestehende Software.</p>
+        <a href="#kontakt" class="btn cta">Kostenlose Beratung anfragen</a>
+      </div>
+      <div class="kpi-wrap">
+        <div class="kpi fade-in">
+          <span class="counter" data-target="70" data-prefix="+" data-suffix="%">0</span>
+          <p>Umsatzsteigerung</p>
+        </div>
+        <div class="kpi fade-in">
+          <span class="counter" data-target="0">0</span>
+          <p>Schulungen nötig</p>
+        </div>
+        <div class="kpi fade-in">
+          <span class="counter" data-target="150">0</span>
+          <p>Tage Intervall</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="leistungen" class="leistungen fade-in">
+      <div class="container">
+        <h2>So funktioniert Digital-KI</h2>
+        <ul class="checklist">
+          <li>Integration in Ihr bestehendes CRM ohne Softwarewechsel.</li>
+          <li>Automatischer Versand personalisierter Erinnerungen per Post, optional SMS oder E-Mail.</li>
+          <li>100% DSGVO-konform – alle Daten verbleiben in Ihrem System.</li>
+          <li>Positive Rendite in nur 1–2 Monaten.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="vorteile" class="vorteile fade-in">
+      <div class="container">
+        <h2>Ihre Vorteile</h2>
+        <div class="benefits-grid">
+          <div class="benefit">
+            <h3>Keine Software-Umstellung</h3>
+            <p>Unsere Lösung passt sich Ihrer bestehenden Infrastruktur an.</p>
+          </div>
+          <div class="benefit">
+            <h3>Vollautomatisiert</h3>
+            <p>Keine Schulungen oder zusätzlichen Ressourcen erforderlich.</p>
+          </div>
+          <div class="benefit">
+            <h3>DSGVO-konform</h3>
+            <p>Alle Patientendaten bleiben sicher bei Ihnen.</p>
+          </div>
+          <div class="benefit">
+            <h3>Schnelle Amortisation</h3>
+            <p>Erzielt typischerweise nach 1–2 Monaten einen positiven ROI.</p>
+          </div>
+        </div>
+        <a href="#kontakt" class="btn cta secondary">Kostenlose Beratung anfragen</a>
+      </div>
+    </section>
+
+    <section id="kontakt" class="kontakt fade-in">
+      <div class="container">
+        <h2>Kontakt aufnehmen</h2>
+        <form name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+          <input type="hidden" name="form-name" value="kontakt">
+          <p class="hidden">
+            <label>Bot-Falle: <input name="bot-field" /></label>
+          </p>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="nachricht">Nachricht</label>
+            <textarea id="nachricht" name="nachricht" required></textarea>
+          </div>
+          <button type="submit" class="btn cta">Senden</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fade-in">
+    <div class="container footer-links">
+      <p>&copy; 2024 Digital-KI</p>
+      <nav>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
