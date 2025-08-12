@@ -1,0 +1,214 @@
+:root {
+  --primary: #0093e9;
+  --secondary: #80d0c7;
+  --dark: #023047;
+  --light: #ffffff;
+  --bg: #f5f9ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--dark);
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--light);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  z-index: 100;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--light);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: var(--secondary);
+}
+
+.btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn.secondary {
+  background: var(--secondary);
+  color: var(--dark);
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--light);
+  text-align: center;
+  padding: 10rem 0 6rem;
+}
+
+.hero .kpi-wrap {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.kpi {
+  text-align: center;
+}
+
+.kpi .counter {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.leistungen,
+.vorteile,
+.kontakt {
+  padding: 6rem 0;
+}
+
+.leistungen ul {
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.leistungen li {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.leistungen li::before {
+  content: '✓';
+  color: var(--primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.benefit {
+  background: var(--light);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+footer {
+  background: var(--light);
+  padding: 2rem 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-links nav a {
+  color: var(--dark);
+  text-decoration: none;
+  margin-left: 1.5rem;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  header .btn-small {
+    display: none;
+  }
+  .hero {
+    padding-top: 8rem;
+  }
+}
