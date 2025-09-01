@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Digital-KI — Erinnerungsservice für Sanitätshäuser</title>
+    <meta name="description" content="Digital-KI: Digitaler Erinnerungsservice für Sanitätshäuser. Weniger Ausfälle durch Vergessen, mehr Wiederkehr, mehr Umsatz — vollautomatisch und DSGVO-konform." />
+
+    <!-- Канонический адрес -->
+    <link rel="canonical" href="https://digital-ki.de/" />
+
+    <!-- Индексация -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Digital-KI" />
+    <meta property="og:title" content="Digital-KI — Erinnerungsservice für Sanitätshäuser" />
+    <meta property="og:description" content="Automatisierte Patienten-Erinnerungen per Brief, SMS oder E-Mail – ohne Systemwechsel, DSGVO-konform." />
+    <meta property="og:url" content="https://digital-ki.de/" />
+    <meta property="og:image" content="https://digital-ki.de/og-cover.jpg" />
+    <meta property="og:locale" content="de_DE" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Digital-KI — Erinnerungsservice für Sanitätshäuser" />
+    <meta name="twitter:description" content="Mehr Wiederkehr & Umsatz durch automatische Erinnerungen. DSGVO-konform." />
+    <meta name="twitter:image" content="https://digital-ki.de/og-cover.jpg" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0B1220" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Noto Sans','Liberation Sans','sans-serif'] },
+            colors: {
+              dk: {
+                bg: '#0B1220',
+                card: '#0F172A',
+                brand: '#16A34A',
+                brandAlt: '#22C55E',
+                text: '#E5E7EB',
+                muted: '#94A3B8'
+              }
+            },
+            boxShadow: {
+              soft: '0 10px 30px rgba(0,0,0,0.25)'
+            },
+            animation: {
+              'fade-in-up': 'fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'fade-in-left': 'fadeInLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'fade-in-right': 'fadeInRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'scale-in': 'scaleIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'slide-in-up': 'slideInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' }
+              },
+              fadeInLeft: {
+                '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' }
+              },
+              fadeInRight: {
+                '0%': { opacity: '0', transform: 'translateX(30px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' }
+              },
+              scaleIn: {
+                '0%': { opacity: '0', transform: 'scale(0.8)' },
+                '100%': { opacity: '1', transform: 'scale(1)' }
+              },
+              slideInUp: {
+                '0%': { opacity: '0', transform: 'translateY(50px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html { scroll-behavior:smooth; }
+      .container-xl { max-width: 1120px; }
+      
+      /* Background dots pattern */
+      .bg-dots {
+        background-image: radial-gradient(circle, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+      }
+      
+      /* Animation delays for staggered effects */
+      .animate-delay-100 { animation-delay: 0.1s; }
+      .animate-delay-200 { animation-delay: 0.2s; }
+      .animate-delay-300 { animation-delay: 0.3s; }
+      .animate-delay-400 { animation-delay: 0.4s; }
+      .animate-delay-500 { animation-delay: 0.5s; }
+      .animate-delay-600 { animation-delay: 0.6s; }
+      .animate-delay-700 { animation-delay: 0.7s; }
+      .animate-delay-800 { animation-delay: 0.8s; }
+      
+      /* Initial state for animations */
+      .animate-on-load {
+        opacity: 0 !important;
+        animation-play-state: paused;
+        animation-fill-mode: both;
+        transition: none !important;
+      }
+      
+      /* Animation states */
+      .animate-on-load.animate-fade-in-up {
+        transform: translateY(40px) scale(0.95);
+      }
+      
+      .animate-on-load.animate-fade-in-left {
+        transform: translateX(-40px) scale(0.95);
+      }
+      
+      .animate-on-load.animate-fade-in-right {
+        transform: translateX(40px) scale(0.95);
+      }
+      
+      .animate-on-load.animate-scale-in {
+        transform: scale(0.7) rotate(-2deg);
+      }
+      
+      .animate-on-load.animate-slide-in-up {
+        transform: translateY(60px) scale(0.9);
+      }
+      
+      /* Active animation states */
+      .animate-fade-in-up {
+        animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      
+      .animate-fade-in-left {
+        animation: fadeInLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      
+      .animate-fade-in-right {
+        animation: fadeInRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      
+      .animate-scale-in {
+        animation: scaleIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      
+      .animate-slide-in-up {
+        animation: slideInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      
+      /* Enhanced keyframes for smoother animations */
+      @keyframes fadeInUp {
+        0% { 
+          opacity: 0; 
+          transform: translateY(40px) scale(0.95);
+        }
+        50% { 
+          opacity: 0.7; 
+          transform: translateY(20px) scale(0.98);
+        }
+        100% { 
+          opacity: 1; 
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      @keyframes fadeInLeft {
+        0% { 
+          opacity: 0; 
+          transform: translateX(-40px) scale(0.95);
+        }
+        50% { 
+          opacity: 0.7; 
+          transform: translateX(-20px) scale(0.98);
+        }
+        100% { 
+          opacity: 1; 
+          transform: translateX(0) scale(1);
+        }
+      }
+      
+      @keyframes fadeInRight {
+        0% { 
+          opacity: 0; 
+          transform: translateX(40px) scale(0.95);
+        }
+        50% { 
+          opacity: 0.7; 
+          transform: translateX(20px) scale(0.98);
+        }
+        100% { 
+          opacity: 1; 
+          transform: translateX(0) scale(1);
+        }
+      }
+      
+      @keyframes scaleIn {
+        0% { 
+          opacity: 0; 
+          transform: scale(0.7) rotate(-2deg);
+        }
+        50% { 
+          opacity: 0.8; 
+          transform: scale(0.9) rotate(-1deg);
+        }
+        100% { 
+          opacity: 1; 
+          transform: scale(1) rotate(0deg);
+        }
+      }
+      
+      @keyframes slideInUp {
+        0% { 
+          opacity: 0; 
+          transform: translateY(60px) scale(0.9);
+        }
+        50% { 
+          opacity: 0.6; 
+          transform: translateY(30px) scale(0.95);
+        }
+        100% { 
+          opacity: 1; 
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      /* Smooth transitions */
+      .transition-all {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      /* Hover effects */
+      .hover-lift:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      }
+      
+      /* FAQ Accordion styles */
+      details[open] summary span:last-child {
+        transform: rotate(180deg);
+      }
+      
+      details summary {
+        list-style: none;
+      }
+      
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-dk-bg text-dk-text bg-dots">
+    <!-- NAV -->
+    <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-dk-bg/70 border-b border-white/5 animate-on-load animate-fade-in-up">
+      <div class="mx-auto container-xl px-4 py-4 flex items-center justify-between">
+        <!-- LOGO: wordmark + underline -->
+        <a href="#top" class="group inline-block select-none" aria-label="Digital‑KI Startseite">
+          <span class="block text-white font-extrabold tracking-tight text-xl md:text-2xl leading-none">
+            Digital‑KI
+          </span>
+          <span class="block h-[4px] md:h-[5px] w-full rounded-full
+                       bg-gradient-to-r from-emerald-400 to-sky-500
+                       transition-transform duration-300 group-hover:scale-x-[1.05]"></span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm text-dk-muted">
+          <a href="#vorteile" class="hover:text-white transition-all">Vorteile</a>
+          <a href="#funktioniert" class="hover:text-white transition-all">So funktioniert's</a>
+          <a href="#wirkung" class="hover:text-white transition-all">Wirtschaftliche Wirkung</a>
+          <a href="#about" class="hover:text-white transition-all">Über uns</a>
+          <a href="#kontakt" class="hover:text-white transition-all">Kontakt</a>
+          <a href="#faq" class="hover:text-white transition-all">FAQ</a>
+        </nav>
+        <a href="#kontakt" class="hidden md:inline-flex items-center gap-2 bg-dk-brand hover:bg-dk-brandAlt text-white text-sm font-medium px-4 py-2 rounded-xl shadow-soft transition-all hover-lift">Kostenlose Beratung</a>
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/10">☰</button>
+      </div>
+      <div id="mobileNav" class="md:hidden hidden border-t border-white/10">
+        <div class="mx-auto container-xl px-4 py-3 flex flex-col gap-3 text-sm text-dk-muted">
+          <a href="#vorteile" class="hover:text-white transition-all">Vorteile</a>
+          <a href="#funktioniert" class="hover:text-white transition-all">So funktioniert's</a>
+          <a href="#wirkung" class="hover:text-white transition-all">Wirtschaftliche Wirkung</a>
+          <a href="#about" class="hover:text-white transition-all">Über uns</a>
+          <a href="#kontakt" class="hover:text-white transition-all">Kontakt</a>
+          <a href="#faq" class="hover:text-white transition-all">FAQ</a>
+          <a href="#kontakt" class="inline-flex items-center justify-center bg-dk-brand hover:bg-dk-brandAlt text-white text-sm font-medium px-4 py-2 rounded-xl shadow-soft transition-all hover-lift">Kostenlose Beratung</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="top" class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/10 via-transparent to-transparent pointer-events-none"></div>
+      <div class="mx-auto container-xl px-4 pt-20 pb-16 md:pt-28 md:pb-24">
+        <div class="grid md:grid-cols-[1fr,1.5fr] items-start gap-10">
+          <div class="animate-on-load animate-fade-in-left">
+            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight animate-on-load animate-fade-in-left animate-delay-100">Digitaler Erinnerungsservice für <span class="text-emerald-400">Sanitätshäuser</span></h1>
+            <p class="mt-5 text-lg text-dk-muted leading-relaxed animate-on-load animate-fade-in-left animate-delay-200">Automatisieren Sie Ihre Kundenkommunikation – ganz ohne Systemwechsel. Erinnerungen per Brief, SMS oder E‑Mail, vollautomatisch und DSGVO‑konform.</p>
+            
+            <div class="mt-7 flex flex-wrap items-center gap-3 animate-on-load animate-fade-in-left animate-delay-300">
+              <a href="#kontakt" class="inline-flex items-center gap-2 bg-dk-brand hover:bg-dk-brandAlt text-white text-base font-semibold px-5 py-3 rounded-2xl shadow-soft transition-all hover-lift">Kostenlose Beratung buchen</a>
+              <a href="#funktioniert" class="inline-flex items-center gap-2 text-dk-text/80 hover:text-white font-medium px-5 py-3 transition-all">So funktioniert's →</a>
+            </div>
+            <div class="mt-6 flex items-center gap-6 text-xs text-dk-muted animate-on-load animate-fade-in-left animate-delay-400">
+              <div class="flex items-center gap-2">✅ Kein Softwarewechsel</div>
+              <div class="flex items-center gap-2">✅ Vollautomatisch</div>
+              <div class="flex items-center gap-2">✅ DSGVO‑konform</div>
+            </div>
+          </div>
+          <div class="animate-on-load animate-fade-in-right animate-delay-200 h-full">
+            <div class="relative h-full">
+              <div class="h-full w-full rounded-3xl bg-dk-card border border-white/10 shadow-soft overflow-hidden animate-on-load animate-scale-in animate-delay-400 hover-lift transition-all">
+                <video 
+                  class="w-full h-full object-cover" 
+                  autoplay 
+                  muted 
+                  loop 
+                  playsinline
+                  preload="metadata" 
+                  width="600" 
+                  height="450"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'%3E%3Crect width='600' height='450' fill='%230f172a'/%3E%3C/svg%3E"
+                >
+                  <source src="_version_10_202508141843.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEINE VORKOSTEN - COMPACT -->
+    <section class="py-12 bg-gradient-to-r from-emerald-500/10 to-sky-500/10 border-y border-white/5">
+      <div class="mx-auto container-xl px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="p-6 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-sky-500/20 border border-emerald-500/30 animate-on-load animate-fade-in-up animate-delay-100">
+            <p class="text-xl font-semibold text-white">
+              <span class="text-emerald-400">Keine Vorkosten</span> für Analyse, Anpassung und Integration – 
+              <br class="hidden sm:inline">wir liefern zuerst, Sie entscheiden danach.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VORTEILE -->
+    <section id="vorteile" class="py-16 md:py-24 border-t border-white/5 bg-white/5">
+      <div class="mx-auto container-xl px-4">
+        <h2 class="text-2xl md:text-3xl font-bold animate-on-load animate-fade-in-up animate-delay-100">Ihre Vorteile</h2>
+        <p class="mt-3 text-dk-muted max-w-2xl animate-on-load animate-fade-in-up animate-delay-200">Weniger Ausfälle durch Vergessen, höhere Wiederkehrquote und spürbar mehr Umsatz – ohne Mehraufwand für Ihr Team.</p>
+        <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-300 hover-lift transition-all">
+            <h3 class="font-semibold mb-2">Kein Systemwechsel</h3>
+            <p class="text-dk-muted">Wir arbeiten mit Ihren bestehenden Kundendaten – direkt aus Ihrem aktuellen System oder aus einer einfachen Tabelle. Alles läuft ohne Unterbrechung Ihrer Abläufe.</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-400 hover-lift transition-all">
+            <h3 class="font-semibold mb-2">Vollautomatisch</h3>
+            <p class="text-dk-muted">Das Modul erkennt selbstständig Anspruchsintervalle (z. B. Einlagen alle 6 Monate) und erinnert rechtzeitig.</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-500 hover-lift transition-all">
+            <h3 class="font-semibold mb-2">Multi‑Kanal</h3>
+            <p class="text-dk-muted">Brief (Standard), optional SMS oder E‑Mail – je nach Präferenz des Patienten.</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-600 hover-lift transition-all">
+            <h3 class="font-semibold mb-2">DSGVO‑konform</h3>
+            <p class="text-dk-muted">Betrieb datenschutzkonform, zweckgebundene Datenverarbeitung, Auftragsverarbeitung auf Wunsch.</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-700 hover-lift transition-all">
+            <h3 class="font-semibold mb-2">Schnelle Amortisation</h3>
+            <p class="text-dk-muted">Rendite oft innerhalb von 1–2 Monaten – durch planbare Wiederholkäufe.</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-800 hover-lift transition-all">
+            <h3 class="font-semibold mb-2">Kein Mehraufwand</h3>
+            <p class="text-dk-muted">Die Einrichtung übernehmen wir vollständig für Sie. Danach läuft das Modul automatisch im Hintergrund.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WARUM KEINE VORKOSTEN -->
+    <section class="py-16 md:py-24 bg-white/5">
+      <div class="mx-auto container-xl px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-2xl md:text-3xl font-bold text-center animate-on-load animate-fade-in-up animate-delay-100">
+            Warum keine Vorkosten?
+          </h2>
+          
+          <div class="mt-10 space-y-6 text-dk-muted animate-on-load animate-fade-in-up animate-delay-200">
+            <p class="text-lg leading-relaxed">
+              Sanitätshäuser arbeiten mit sensiblen Daten und sehr unterschiedlichen Systemen – viele davon sind älter, individuell angepasst oder speziell für das Gesundheitswesen entwickelt.
+              Unser Erinnerungsmodul hat ein universelles Kernsystem, doch die Anbindung an Ihre Struktur erfordert immer eine individuelle Entwicklung und Integration.
+            </p>
+            
+            <p class="text-lg leading-relaxed">
+              Andere IT-Firmen verlangen für diese Arbeit Vorkosten – oft noch bevor überhaupt klar ist, ob die Lösung in Ihrer Umgebung reibungslos funktioniert.
+            </p>
+            
+            <div class="mt-8 p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-fade-in-up animate-delay-300">
+              <h3 class="text-xl font-semibold text-white mb-4">Wir machen es anders:</h3>
+              <p class="text-lg leading-relaxed mb-4">
+                Wir analysieren Ihre Systeme, entwickeln die nötige Verbindung und starten die Integration – ohne dass Sie vorab zahlen müssen.
+                Erst wenn alles erfolgreich läuft und Sie zufrieden sind, entscheiden Sie über den Kauf.
+              </p>
+              <p class="text-lg font-medium text-emerald-400">
+                Das bedeutet für Sie: maximale Sicherheit, null Risiko und eine Lösung, die wirklich funktioniert.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SO FUNKTIONIERT'S -->
+    <section id="funktioniert" class="py-16 md:py-24">
+      <div class="mx-auto container-xl px-4">
+        <h2 class="text-2xl md:text-3xl font-bold animate-on-load animate-fade-in-up animate-delay-100">So funktioniert's</h2>
+        <div class="mt-10 grid md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-200 hover-lift transition-all">
+            <div class="text-sm text-dk-muted">Schritt 1</div>
+            <h3 class="font-semibold mt-1 mb-2">Datenübernahme</h3>
+            <p class="text-dk-muted">Wir übernehmen die Kundendaten direkt aus Ihrem bestehenden System oder aus einer einfachen Liste. Dabei passen wir uns Ihrer Struktur an – ohne zusätzlichen Aufwand für Sie.</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-300 hover-lift transition-all">
+            <div class="text-sm text-dk-muted">Schritt 2</div>
+            <h3 class="font-semibold mt-1 mb-2">Erkennung & Terminierung</h3>
+            <p class="text-dk-muted">Automatische Ermittlung, wann ein neuer Anspruch besteht (z. B. 150 Tage nach letzter Versorgung).</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-400 hover-lift transition-all">
+            <div class="text-sm text-dk-muted">Schritt 3</div>
+            <h3 class="font-semibold mt-1 mb-2">Versand</h3>
+            <p class="text-dk-muted">Die Erinnerungen werden automatisch verschickt – per Brief, SMS oder E-Mail. Das Design und die Sprache passen wir Ihrem Haus an.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- WIRKUNG -->
+    <section id="wirkung" class="py-16 md:py-24 border-y border-white/5 bg-white/5">
+      <div class="mx-auto container-xl px-4">
+        <h2 class="text-2xl md:text-3xl font-bold animate-on-load animate-fade-in-up animate-delay-100">Wirtschaftliche Wirkung</h2>
+        <p class="mt-3 text-dk-muted max-w-2xl animate-on-load animate-fade-in-up animate-delay-200">Erprobte Praxis zeigt: Digitale Erinnerungen erhöhen die Wiederkehrquote deutlich. Beispielhafte Spannweiten aus Branchenangaben.</p>
+        <div class="mt-10 grid md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-300 hover-lift transition-all">
+            <div class="text-4xl font-extrabold">40–70k€</div>
+            <div class="text-dk-muted">Orientierungswerte: Jahresumsatz ohne Modul (Bestandskunden)</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-400 hover-lift transition-all">
+            <div class="text-4xl font-extrabold">+30–50k€</div>
+            <div class="text-dk-muted">Zusätzlicher Umsatz/Jahr mit Erinnerungsmodul</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-500 hover-lift transition-all">
+            <div class="text-4xl font-extrabold">1–2 Mon.</div>
+            <div class="text-dk-muted">Typische Amortisationszeit</div>
+          </div>
+        </div>
+        <p class="mt-6 text-xs text-dk-muted animate-on-load animate-fade-in-up animate-delay-600">Hinweis: Die Angaben basieren auf Branchenberichten und dienen ausschließlich der Orientierung. Konkrete Ergebnisse können je nach Kundenbasis, Produktmix und Region variieren.</p>
+      </div>
+    </section>
+
+    <!-- RÜCKMELDUNGEN AUS DER BRANCHE -->
+    <section id="rueckmeldungen" class="py-16 md:py-24">
+      <div class="mx-auto container-xl px-4">
+        <h2 class="text-2xl md:text-3xl font-bold animate-on-load animate-fade-in-up animate-delay-100">Beispielhafte Rückmeldungen aus der Branche</h2>
+        <p class="mt-3 text-dk-muted max-w-2xl animate-on-load animate-fade-in-up animate-delay-200">Aus Pilotgesprächen und Fachrunden – typische Stimmen ohne Nennung einzelner Personen/Firmen.</p>
+        <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-300 hover-lift transition-all" role="figure">
+            <blockquote class="text-dk-muted leading-relaxed mb-4">„Das Erinnerungsmodul entlastet unser Team spürbar – die Abläufe laufen im Hintergrund automatisch."</blockquote>
+            <figcaption class="text-sm text-dk-muted">Rückmeldung aus einem Sanitätshaus</figcaption>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-400 hover-lift transition-all" role="figure">
+            <blockquote class="text-dk-muted leading-relaxed mb-4">„Patientinnen und Patienten kommen regelmäßiger wieder, weil sie rechtzeitig erinnert werden."</blockquote>
+            <figcaption class="text-sm text-dk-muted">Feedback eines Orthopädie-Fachgeschäfts</figcaption>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-500 hover-lift transition-all" role="figure">
+            <blockquote class="text-dk-muted leading-relaxed mb-4">„Die Lösung ist datenschutzkonform, schnell eingeführt und ohne zusätzliche Schulungen nutzbar."</blockquote>
+            <figcaption class="text-sm text-dk-muted">Einschätzung aus einem Fachgespräch</figcaption>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 animate-on-load animate-slide-in-up animate-delay-600 hover-lift transition-all" role="figure">
+            <blockquote class="text-dk-muted leading-relaxed mb-4">„Die Kommunikation per Brief, E-Mail oder SMS lässt sich pro Kunde flexibel steuern."</blockquote>
+            <figcaption class="text-sm text-dk-muted">Rückmeldung aus einer Filiale</figcaption>
+          </div>
+        </div>
+        <p class="mt-6 text-xs text-dk-muted animate-on-load animate-fade-in-up animate-delay-700">
+          Hinweis: Die Zitate sind beispielhafte Formulierungen aus allgemeinen Fachgesprächen und dienen ausschließlich der Illustration. 
+          Es handelt sich nicht um direkte Kundenreferenzen.
+        </p>
+      </div>
+    </section>
+
+
+
+    <!-- ABOUT / ÜBER UNS -->
+    <section id="about" class="py-16 md:py-24">
+      <div class="mx-auto container-xl px-4 grid md:grid-cols-[1fr,1.5fr] gap-10 items-start">
+        <div class="overflow-hidden animate-on-load animate-fade-in-left animate-delay-200 hover-lift transition-all md:pt-8">
+          <!-- Dmitrii Shefer Photo -->
+          <img src="My photo.jpg" alt="Dmitrii Shefer" class="w-full h-full object-cover rounded-3xl" width="400" height="500" loading="lazy" />
+        </div>
+        <div class="animate-on-load animate-fade-in-right animate-delay-300">
+          <h2 class="text-2xl md:text-3xl font-bold">Über uns</h2>
+          <p class="mt-4 text-dk-muted leading-relaxed">
+            Digital-KI begleitet Sanitätshäuser als spezialisierte IT-Beratung bei der Einführung digitaler Erinnerungs- und Kommunikationssysteme.
+            Wir analysieren gemeinsam Ihre bestehenden Prozesse und entwickeln eine individuell passende Lösung auf Basis bewährter Automatisierungsansätze.
+          </p>
+          
+          <p class="mt-4 text-dk-muted leading-relaxed">
+            Geleitet wird das Unternehmen von <span class="text-white font-semibold">Dmitrii Shefer</span>, Gründer und Hauptberater mit langjähriger Erfahrung aus internationalen Projekten.
+            Zuvor war er in einer verantwortlichen technischen Rolle bei <span class="text-white font-semibold">Invacare</span> tätig, einem weltweit führenden Hersteller von Reha- und Orthopädieprodukten, die insbesondere in Sanitätshäusern eingesetzt werden.
+          </p>
+          
+          <p class="mt-4 text-dk-muted leading-relaxed">
+            Darüber hinaus arbeitete er an Digitalisierungs- und IT-Projekten mit <span class="text-white font-semibold">Microsoft</span>, wodurch er tiefes Know-how in modernen Softwarelösungen, Cloud-Architekturen und Automatisierung erwarb.
+          </p>
+          
+          <p class="mt-4 text-dk-muted leading-relaxed">
+            Die Kombination aus technischem Hintergrund, internationaler Projekterfahrung und spezifischem Branchenwissen macht Digital-KI zu einem einzigartigen Partner für Sanitätshäuser.
+            Unser Ziel ist es, traditionelle Einrichtungen effizienter, zukunftssicher und profitabler zu machen – mit einer Lösung, die individuell an Ihre Strukturen angepasst wird.
+          </p>
+          
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#kontakt" class="inline-flex items-center gap-2 bg-dk-brand hover:bg-dk-brandAlt text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-soft transition-all hover-lift">Kostenlose Beratung</a>
+            <a href="https://www.linkedin.com/in/dmitrii-shefer" target="_blank" class="inline-flex items-center gap-2 text-dk-text/80 hover:text-white text-sm font-medium px-4 py-2 rounded-xl border border-white/10 transition-all hover-lift">LinkedIn Profil</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT / FORM -->
+    <section id="kontakt" class="py-16 md:py-24">
+      <div class="mx-auto container-xl px-4">
+        <div class="grid md:grid-cols-2 gap-10">
+          <div class="animate-on-load animate-fade-in-left animate-delay-200">
+            <h2 class="text-2xl md:text-3xl font-bold">Kontakt</h2>
+            <p class="mt-3 text-dk-muted">Vereinbaren Sie eine unverbindliche Erstberatung. Wir melden uns in der Regel innerhalb eines Werktags.</p>
+            <ul class="mt-6 space-y-2 text-dk-muted">
+              <li>📍 Mehrower Allee 6, 12687 Berlin</li>
+              <li>✉️ <a class="hover:text-white transition-all" href="mailto:kontakt@digital-ki.de">kontakt@digital-ki.de</a></li>
+              <li>📞 <a class="hover:text-white transition-all" href="tel:+491722504169">+49 172 250 41 69</a></li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl bg-dk-card border border-white/10 shadow-soft animate-on-load animate-fade-in-right animate-delay-300 hover-lift transition-all">
+            <h3 class="text-xl font-semibold mb-4">Direkter Kontakt</h3>
+            <p class="text-dk-muted mb-6">Kontaktieren Sie uns direkt per E-Mail oder Telefon für eine unverbindliche Erstberatung.</p>
+            <div class="grid gap-4">
+              <a href="mailto:kontakt@digital-ki.de" class="inline-flex items-center justify-center gap-2 bg-dk-brand hover:bg-dk-brandAlt text-white font-semibold px-6 py-3 rounded-xl transition-all hover-lift">
+                ✉️ E-Mail schreiben
+              </a>
+              <a href="tel:+491722504169" class="inline-flex items-center justify-center gap-2 bg-dk-card border border-white/10 hover:bg-white/5 text-white font-semibold px-6 py-3 rounded-xl transition-all hover-lift">
+                📞 Anrufen
+              </a>
+            </div>
+          </div>
+          
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ COMPACT -->
+    <section id="faq" class="py-12 border-t border-white/5 bg-white/5">
+      <div class="mx-auto container-xl px-4">
+        <details class="group">
+          <summary class="cursor-pointer text-lg font-semibold text-dk-muted hover:text-white transition-all flex items-center justify-between">
+            <span>Häufig gestellte Fragen</span>
+            <span class="text-sm group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-6 space-y-4 text-sm text-dk-muted">
+            <div class="border-l-2 border-dk-brand/30 pl-4">
+              <h4 class="font-medium text-white mb-2">Müssen wir unser System wechseln?</h4>
+              <p>Nein. Wir arbeiten mit Ihren bestehenden Kundendaten oder einfachen Listen. Das Erinnerungsmodul hat ein universelles Kernsystem und passt sich über individuelle Anpassungen an Ihre Strukturen an – ohne Systemwechsel oder zusätzliche Software.</p>
+            </div>
+            
+            <div class="border-l-2 border-dk-brand/30 pl-4">
+              <h4 class="font-medium text-white mb-2">Welche Kanäle sind möglich?</h4>
+              <p>Standardmäßig Brief; optional SMS und E-Mail – je Patient konfigurierbar. Wir richten die Kommunikation an den Präferenzen Ihrer Kunden aus.</p>
+            </div>
+            
+            <div class="border-l-2 border-dk-brand/30 pl-4">
+              <h4 class="font-medium text-white mb-2">Ist das DSGVO-konform?</h4>
+              <p>Ja. Verarbeitung zweckgebunden; Auftragsverarbeitung (AVV) möglich. Keine unnötigen Cookies/Tracker. Wir arbeiten ausschließlich mit den Daten, die Sie bereitstellen.</p>
+            </div>
+            
+            <div class="border-l-2 border-dk-brand/30 pl-4">
+              <h4 class="font-medium text-white mb-2">Wie läuft die Einführung ab?</h4>
+              <p>Wir beginnen mit einem kostenlosen Analysegespräch. Ein Spezialist prüft Ihre bestehende Struktur und zeigt, wie sich das Erinnerungsmodul dort einbinden lässt. Die Anpassung und Integration erfolgen individuell, da jede Umgebung unterschiedlich ist. <strong>Für Sie entstehen dabei keine Vorkosten – erst wenn alles läuft, entscheiden Sie über den Kauf.</strong></p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- FOOTER with Legal -->
+    <footer class="py-10 border-t border-white/5 bg-white/5">
+      <div class="mx-auto container-xl px-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 animate-on-load animate-fade-in-up animate-delay-400">
+        <div>
+          <div class="text-lg font-semibold">Digital‑KI</div>
+          <div class="text-sm text-dk-muted">Digitalisierung & KI‑Automatisierung für Sanitätshäuser</div>
+          <div class="text-xs text-dk-muted mt-1">Digital-KI ist eine freiberufliche IT-Beratung (Softwareentwicklung & Automatisierung).</div>
+        </div>
+        <div class="flex gap-6 text-sm">
+          <a href="impressum.html" class="hover:text-white transition-all">Impressum</a>
+          <a href="datenschutz.html" class="hover:text-white transition-all">Datenschutz</a>
+        </div>
+      </div>
+    </footer>
+
+
+
+
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["Organization","ProfessionalService"],
+      "name": "Digital-KI",
+      "url": "https://digital-ki.de/",
+      "logo": "https://digital-ki.de/logo.png",
+      "image": "https://digital-ki.de/og-cover.jpg",
+      "description": "Digitale Erinnerungen für Sanitätshäuser: Brief, SMS, E-Mail – ohne Systemwechsel, DSGVO-konform.",
+      "telephone": "+49-172-2504169",
+      "email": "kontakt@digital-ki.de",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mehrower Allee 6",
+        "postalCode": "12687",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      },
+      "areaServed": "DE",
+      "sameAs": [
+        "https://www.linkedin.com/in/dmitrii-shefer"
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Erinnerungsservice für Sanitätshäuser",
+      "provider": { "@type": "Organization", "name": "Digital-KI" },
+      "areaServed": "DE",
+      "serviceType": "Automatisierte Patienten-Erinnerungen",
+      "description": "Automatische Erinnerungen an Anspruchsintervalle (z. B. Einlagen alle 6 Monate) via Brief, SMS oder E-Mail.",
+      "offers": { "@type": "Offer", "availability": "https://schema.org/InStock" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [{
+       "@type": "Question",
+       "name": "Müssen wir unser System wechseln?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Nein. Wir arbeiten mit Ihren bestehenden Kundendaten oder einfachen Listen. Das Erinnerungsmodul hat ein universelles Kernsystem und passt sich über individuelle Anpassungen an Ihre Strukturen an – ohne Systemwechsel oder zusätzliche Software."
+       }
+     },{
+       "@type": "Question",
+       "name": "Welche Kanäle sind möglich?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Standardmäßig Brief; optional SMS und E-Mail – je Patient konfigurierbar. Wir richten die Kommunikation an den Präferenzen Ihrer Kunden aus."
+       }
+     },{
+       "@type": "Question",
+       "name": "Ist das DSGVO-konform?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ja. Verarbeitung zweckgebunden; Auftragsverarbeitung (AVV) möglich. Keine unnötigen Cookies/Tracker. Wir arbeiten ausschließlich mit den Daten, die Sie bereitstellen."
+       }
+     },{
+       "@type": "Question",
+       "name": "Wie läuft die Einführung ab?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Wir beginnen mit einem kostenlosen Analysegespräch. Ein Spezialist prüft Ihre bestehende Struktur und zeigt, wie sich das Erinnerungsmodul dort einbinden lässt. Die Anpassung und Integration erfolgen individuell, da jede Umgebung unterschiedlich ist. Für Sie entstehen dabei keine Vorkosten – erst wenn alles läuft, entscheiden Sie über den Kauf."
+       }
+     }]
+    }
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
